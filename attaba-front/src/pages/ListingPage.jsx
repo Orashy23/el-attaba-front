@@ -28,7 +28,11 @@ export default function ListingPage() {
   }, [query, category])
 
   const categoryLabel = categories.find((item) => item.slug === category)?.label
-  const heading = query ? `Results for “${query}”` : categoryLabel || 'All products'
+  const heading = query
+    ? `Results for “${query}”`
+    : category === 'bestsellers'
+      ? 'Top figures'
+      : categoryLabel || 'All figures'
 
   return (
     <div className="listing-page">

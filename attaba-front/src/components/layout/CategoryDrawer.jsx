@@ -15,10 +15,20 @@ export default function CategoryDrawer({ open, onClose }) {
             ×
           </button>
         </div>
-        <h2>Shop by world</h2>
+        <h2>Shop</h2>
         <ul>
+          <li>
+            <Link to="/category/all" onClick={onClose}>
+              All figures
+            </Link>
+          </li>
+          <li>
+            <Link to="/category/bestsellers" onClick={onClose}>
+              Top figures
+            </Link>
+          </li>
           {categories
-            .filter((item) => item.id !== 'all')
+            .filter((item) => !['all', 'bestsellers'].includes(item.id))
             .map((item) => (
               <li key={item.id}>
                 <Link to={`/category/${item.slug}`} onClick={onClose}>

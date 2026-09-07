@@ -1,0 +1,112 @@
+.assistant-page {
+  max-width: 760px;
+  margin: 0 auto;
+  min-height: calc(100svh - var(--header-h) - 120px);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 28px 24px;
+}
+
+.assistant-head {
+  margin-bottom: 20px;
+}
+
+.assistant-head p {
+  margin: 0 0 6px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.assistant-head h1 {
+  font-family: var(--display);
+  letter-spacing: 0.06em;
+  font-size: 48px;
+  margin: 0 0 8px;
+}
+
+.assistant-head span {
+  color: var(--muted);
+}
+
+.assistant-thread {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 0 20px;
+}
+
+.assistant-msg {
+  max-width: 80%;
+  padding: 14px 16px;
+  font-size: 15px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.assistant-msg p {
+  margin: 0;
+}
+
+.assistant-msg ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.assistant-msg.is-you {
+  align-self: flex-end;
+  background: #111;
+  color: #fff;
+}
+
+.assistant-msg.is-agent {
+  align-self: flex-start;
+  background: var(--sand);
+}
+
+.assistant-busy {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.assistant-composer {
+  display: flex;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.assistant-composer input {
+  flex: 1;
+  margin: 0;
+  border: 1px solid var(--line);
+  padding: 14px 12px;
+}
+
+.assistant-composer button {
+  border: 0;
+  background: var(--sale);
+  color: #fff;
+  padding: 0 22px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.assistant-composer button:disabled {
+  opacity: 0.5;
+}
+
+@media (max-width: 700px) {
+  .assistant-page {
+    padding: 20px 16px 16px;
+  }
+
+  .assistant-msg {
+    max-width: 92%;
+  }
+}

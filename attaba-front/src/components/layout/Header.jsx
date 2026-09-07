@@ -87,7 +87,7 @@ export default function Header({ onOpenMenu }) {
         </Link>
 
         <nav className="main-nav" aria-label="Shop">
-          <NavLink to="/search">New drops</NavLink>
+          <NavLink to="/category/all">All figures</NavLink>
 
           <div
             className={`nav-dropdown ${collectionsOpen ? 'is-open' : ''}`}
@@ -116,7 +116,7 @@ export default function Header({ onOpenMenu }) {
             </div>
           </div>
 
-          <NavLink to="/search">Top figures</NavLink>
+          <NavLink to="/category/bestsellers">Top figures</NavLink>
           <NavLink to="/category/deals" className="sale-link">
             Deals
           </NavLink>

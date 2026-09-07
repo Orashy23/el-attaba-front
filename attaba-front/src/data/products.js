@@ -1,5 +1,6 @@
 export const categories = [
   { id: 'all', label: 'All figures', slug: 'all' },
+  { id: 'bestsellers', label: 'Top figures', slug: 'bestsellers' },
   { id: 'deals', label: 'On Sale', slug: 'deals' },
   { id: 'marvel', label: 'Marvel', slug: 'marvel' },
   { id: 'anime', label: 'Anime', slug: 'anime' },
@@ -8,7 +9,9 @@ export const categories = [
   { id: 'gaming', label: 'Gaming', slug: 'gaming' },
 ]
 
-export const collectionLinks = categories.filter((item) => !['all', 'deals'].includes(item.id))
+export const collectionLinks = categories.filter(
+  (item) => !['all', 'deals', 'bestsellers'].includes(item.id),
+)
 
 export const products = [
   {
@@ -239,9 +242,16 @@ export function getProductById(id) {
   return products.find((product) => product.id === id)
 }
 
+export function getBestsellers() {
+  return products
+    .filter((product) => product.badge === 'Best seller' || product.reviews >= 800)
+    .sort((a, b) => b.reviews - a.reviews)
+}
+
 export function getProductsByCategory(slug) {
   if (!slug || slug === 'all') return products
   if (slug === 'deals') return products.filter((product) => product.badge === 'Deal')
+  if (slug === 'bestsellers') return getBestsellers()
   return products.filter((product) => product.category === slug)
 }
 
