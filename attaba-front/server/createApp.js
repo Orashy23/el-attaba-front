@@ -54,7 +54,13 @@ export function createApp(store) {
 
     let list = products
     if (category === 'deals') list = list.filter((item) => item.badge === 'Deal')
-    else if (category && category !== 'all') list = list.filter((item) => item.category === category)
+    else if (category === 'bestsellers') {
+      list = list
+        .filter((item) => item.badge === 'Best seller' || item.reviews >= 800)
+        .sort((a, b) => b.reviews - a.reviews)
+    } else if (category && category !== 'all') {
+      list = list.filter((item) => item.category === category)
+    }
     if (q) {
       list = list.filter(
         (item) =>

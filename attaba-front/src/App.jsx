@@ -10,6 +10,7 @@ import CheckoutPage from './pages/CheckoutPage'
 import ListingPage from './pages/ListingPage'
 import AccountPage from './pages/AccountPage'
 import OrdersPage from './pages/OrdersPage'
+import AssistantPage from './pages/AssistantPage'
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="/assistant" element={<AssistantPage />} />
               <Route path="/account" element={<AccountPage />} />
               <Route
                 path="/orders"

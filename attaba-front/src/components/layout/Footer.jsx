@@ -14,6 +14,8 @@ export default function Footer() {
               {item.label}
             </Link>
           ))}
+          <Link to="/category/all">All figures</Link>
+          <Link to="/category/bestsellers">Top figures</Link>
           <Link to="/category/deals">Deals</Link>
         </div>
         <div>
