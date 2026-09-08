@@ -21,7 +21,7 @@ export default function OrdersPage() {
     <div className="simple-page">
       <div className="account-panel">
         <h1>{user?.role === 'admin' ? 'All orders' : 'Your orders'}</h1>
-        <p className="muted">Customers only see orders they own. Admins can list every order.</p>
+        <p className="muted">Users only see orders they own. Admins can list every order.</p>
         {error ? <p className="form-error">{error}</p> : null}
         {!orders.length && !error ? <p>No orders yet.</p> : null}
         <ul className="order-list">

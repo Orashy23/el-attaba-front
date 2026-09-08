@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { createStore } from './store.js'
 import { placeOrder } from './checkout.js'
 
-const user = { id: 'u_customer', role: 'customer' }
+const user = { id: 'u_user', role: 'user' }
 
 function payload(extra = {}) {
   return {

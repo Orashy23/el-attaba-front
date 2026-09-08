@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { formatPrice, getProductById } from '../data/products'
+import { formatPrice, getProductById, getSizeSurcharge } from '../data/products'
 import { fetchProduct } from '../services/api'
 import { mapProductDto } from '../services/mapDto'
 import { useCart } from '../context/CartContext'
+import { useAdminData } from '../context/AdminDataContext'
 import './ProductPage.css'
 
 export default function ProductPage() {
   const { id } = useParams()
   const { addItem } = useCart()
+  const { getEffectiveDiscountById } = useAdminData()
   const [product, setProduct] = useState(() => getProductById(id))
-  const [selectedColor, setSelectedColor] = useState(null)
-  const [selectedSize, setSelectedSize] = useState(null)
+  const [loadedId, setLoadedId] = useState(id)
+  const [colorOverride, setColorOverride] = useState(null)
+  const [sizeOverride, setSizeOverride] = useState(null)
 
   useEffect(() => {
     fetchProduct(id)
@@ -19,10 +22,17 @@ export default function ProductPage() {
       .catch(() => setProduct(getProductById(id)))
   }, [id])
 
-  useEffect(() => {
-    setSelectedColor(product?.colors?.[0]?.name ?? null)
-    setSelectedSize(product?.sizes?.[0] ?? null)
-  }, [product])
+  // Reset the variant selection when navigating to a different product. This
+  // adjusts state during render (React's documented pattern for "reset on
+  // prop change") instead of an effect, so it doesn't cost an extra render.
+  if (id !== loadedId) {
+    setLoadedId(id)
+    setColorOverride(null)
+    setSizeOverride(null)
+  }
+
+  const selectedColor = colorOverride ?? product?.colors?.[0]?.name ?? null
+  const selectedSize = sizeOverride ?? product?.sizes?.[0] ?? null
 
   if (!product) {
     return (
@@ -37,6 +47,16 @@ export default function ProductPage() {
   const hasSizes = Boolean(product.sizes?.length)
   const variant = { color: selectedColor, size: selectedSize }
 
+  const selectedSizeIndex = hasSizes ? product.sizes.indexOf(selectedSize) : -1
+  const sizeSurcharge = getSizeSurcharge(product.price, selectedSizeIndex)
+  const priceWithSize = product.price + sizeSurcharge
+  const originalWithSize = product.originalPrice + sizeSurcharge
+
+  const discount = getEffectiveDiscountById(product.id)
+  const shownPrice = discount ? Math.round(priceWithSize * (1 - discount.percentage / 100)) : priceWithSize
+  const wasPrice = discount ? priceWithSize : originalWithSize
+  const cartProduct = { ...product, price: shownPrice }
+
   return (
     <div className="product-page">
       <div className="product-gallery">
@@ -46,11 +66,13 @@ export default function ProductPage() {
         <p className="product-cat">{product.category}</p>
         <h1>{product.title}</h1>
         <p className="product-price-row">
-          <span className="product-amount">{formatPrice(product.price)}</span>
-          {product.originalPrice > product.price ? (
-            <s className="product-was">{formatPrice(product.originalPrice)}</s>
-          ) : null}
+          <span className="product-amount">{formatPrice(shownPrice)}</span>
+          {wasPrice > shownPrice ? <s className="product-was">{formatPrice(wasPrice)}</s> : null}
+          {discount ? <span className="product-discount-tag">-{discount.percentage}%</span> : null}
         </p>
+        {sizeSurcharge > 0 ? (
+          <p className="product-size-note">Price includes +{formatPrice(sizeSurcharge)} for the {selectedSize} size.</p>
+        ) : null}
         <p className="product-copy">{product.description}</p>
 
         <div className="product-options">
@@ -70,7 +92,7 @@ export default function ProductPage() {
                     title={color.name}
                     className={`color-option ${selectedColor === color.name ? 'is-selected' : ''}`}
                     style={{ background: color.hex }}
-                    onClick={() => setSelectedColor(color.name)}
+                    onClick={() => setColorOverride(color.name)}
                   />
                 ))}
               </div>
@@ -83,27 +105,31 @@ export default function ProductPage() {
                 Size: <strong>{selectedSize}</strong>
               </span>
               <div className="size-options" role="radiogroup" aria-label="Size">
-                {product.sizes.map((size) => (
-                  <button
-                    key={size}
-                    type="button"
-                    role="radio"
-                    aria-checked={selectedSize === size}
-                    className={`size-option ${selectedSize === size ? 'is-selected' : ''}`}
-                    onClick={() => setSelectedSize(size)}
-                  >
-                    {size}
-                  </button>
-                ))}
+                {product.sizes.map((size, index) => {
+                  const surcharge = getSizeSurcharge(product.price, index)
+                  return (
+                    <button
+                      key={size}
+                      type="button"
+                      role="radio"
+                      aria-checked={selectedSize === size}
+                      className={`size-option ${selectedSize === size ? 'is-selected' : ''}`}
+                      onClick={() => setSizeOverride(size)}
+                    >
+                      {size}
+                      {surcharge > 0 ? <span className="size-option-delta"> +{formatPrice(surcharge)}</span> : null}
+                    </button>
+                  )
+                })}
               </div>
             </div>
           ) : null}
         </div>
 
-        <button type="button" className="primary-btn" onClick={() => addItem(product, 1, variant)}>
+        <button type="button" className="primary-btn" onClick={() => addItem(cartProduct, 1, variant)}>
           Add to bag
         </button>
-        <Link className="buy-btn" to="/checkout" onClick={() => addItem(product, 1, variant)}>
+        <Link className="buy-btn" to="/checkout" onClick={() => addItem(cartProduct, 1, variant)}>
           Buy now
         </Link>
       </div>

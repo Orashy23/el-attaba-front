@@ -7,7 +7,7 @@ export default function AccountPage() {
   const { isAuthed, user, login, logout } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
-  const [email, setEmail] = useState('customer@figures.test')
+  const [email, setEmail] = useState('user@figures.test')
   const [password, setPassword] = useState('password123')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
@@ -51,7 +51,7 @@ export default function AccountPage() {
     <div className="simple-page">
       <div className="account-panel">
         <h1>Account</h1>
-        <p className="muted">Demo: customer@figures.test / password123 — or admin@figures.test</p>
+        <p className="muted">Demo: user@figures.test / password123 — or admin@figures.test</p>
         <form onSubmit={onSubmit}>
           <label>
             Email

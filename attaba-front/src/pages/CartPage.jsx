@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { formatPrice } from '../data/products'
 import { useCart } from '../context/CartContext'
+import DiscountBanner from '../components/discounts/DiscountBanner'
 import './ProductPage.css'
 
 export default function CartPage() {
@@ -22,6 +23,7 @@ export default function CartPage() {
 
   return (
     <div className="cart-page">
+      <DiscountBanner />
       <div className="cart-layout">
         <section className="page-card">
           <h1>Your bag</h1>

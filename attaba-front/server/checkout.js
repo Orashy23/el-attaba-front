@@ -60,7 +60,7 @@ async function executeCheckout(store, { user, items, address, phone, name, simul
   let order = {
     id: orderId,
     status: 'pending_payment',
-    customerId: user.id,
+    userId: user.id,
     items: snapshotted,
     total,
     address,
@@ -94,7 +94,7 @@ async function executeCheckout(store, { user, items, address, phone, name, simul
 
   order = { ...order, status: 'placed' }
   store.orders.set(order.id, order)
-  log('info', 'order_placed', { orderId: order.id, total, customerId: user.id })
+  log('info', 'order_placed', { orderId: order.id, total, userId: user.id })
   return order
 }
 
@@ -134,12 +134,12 @@ export function placeOrder(store, input) {
 export function listOrdersFor(store, user) {
   const all = [...store.orders.values()].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
   if (user.role === 'admin') return all.map(toOrderDto)
-  return all.filter((order) => order.customerId === user.id).map(toOrderDto)
+  return all.filter((order) => order.userId === user.id).map(toOrderDto)
 }
 
 export function getOwnedOrder(store, user, id) {
   const order = store.orders.get(id)
   if (!order) return { status: 404 }
-  if (user.role !== 'admin' && order.customerId !== user.id) return { status: 403 }
+  if (user.role !== 'admin' && order.userId !== user.id) return { status: 403 }
   return { status: 200, order }
 }

@@ -33,7 +33,7 @@ export function toOrderDto(order) {
   return {
     id: order.id,
     status: order.status,
-    customerId: order.customerId,
+    userId: order.userId,
     items: order.items.map(toOrderItemDto),
     total: order.total,
     address: order.address,

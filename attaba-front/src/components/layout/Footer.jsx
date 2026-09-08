@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
 import { collectionLinks } from '../../data/products'
+import { useAuth } from '../../context/AuthContext'
 import './Footer.css'
 
 export default function Footer() {
+  const { user } = useAuth()
+
   return (
     <footer className="site-footer">
       <div className="footer-brand">FIGURES</div>
@@ -23,6 +26,7 @@ export default function Footer() {
           <Link to="/account">Account</Link>
           <Link to="/orders">Orders</Link>
           <Link to="/cart">Bag</Link>
+          {user?.role === 'admin' ? <Link to="/admin">Admin</Link> : null}
         </div>
         <div>
           <h3>Cairo</h3>

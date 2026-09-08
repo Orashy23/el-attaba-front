@@ -7,11 +7,11 @@ export function createStore() {
     cacheTtlMs: 60_000,
     users: [
       {
-        id: 'u_customer',
-        email: 'customer@figures.test',
+        id: 'u_user',
+        email: 'user@figures.test',
         password: 'password123',
-        role: 'customer',
-        name: 'Collect Customer',
+        role: 'user',
+        name: 'Collector Account',
       },
       {
         id: 'u_admin',

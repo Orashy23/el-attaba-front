@@ -96,6 +96,22 @@
   max-width: 60ch;
 }
 
+.product-size-note {
+  margin: 0 0 16px;
+  font-size: 12px;
+  color: var(--steel);
+}
+
+.size-option-delta {
+  color: var(--steel);
+  font-size: 11px;
+}
+
+.size-option.is-selected .size-option-delta {
+  color: var(--bone);
+  opacity: 0.85;
+}
+
 .product-options {
   margin-top: 20px;
 }
@@ -174,6 +190,20 @@
   margin: 0 0 6px;
   font-size: 13px;
   color: var(--muted);
+}
+
+.checkout-discount-line {
+  color: var(--signal-red);
+  font-weight: 600;
+}
+
+.product-discount-tag {
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--signal-red);
+  color: var(--bone);
+  font-size: 11px;
+  font-weight: 700;
 }
 
 .primary-btn,

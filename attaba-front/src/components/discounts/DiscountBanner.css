@@ -1,0 +1,24 @@
+.discount-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--signal-red);
+  background: var(--bg-soft);
+  color: var(--ink);
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.discount-banner-badge {
+  flex: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--signal-red);
+  color: var(--bone);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

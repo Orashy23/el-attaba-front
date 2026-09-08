@@ -5,6 +5,8 @@ import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 import { placeOrderRequest } from '../services/api'
 import { mapOrderDto } from '../services/mapDto'
+import { getBestUserDiscount, recordOrderCompleted } from '../data/userDiscounts'
+import DiscountBanner from '../components/discounts/DiscountBanner'
 import './ProductPage.css'
 
 export default function CheckoutPage() {
@@ -18,6 +20,12 @@ export default function CheckoutPage() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [order, setOrder] = useState(null)
+  const [paidSummary, setPaidSummary] = useState(null)
+
+  const discount = getBestUserDiscount(user?.id)
+  const discountPercentage = discount?.percentage ?? 0
+  const discountAmount = Math.round((subtotal * discountPercentage) / 100)
+  const payableTotal = subtotal - discountAmount
 
   async function onSubmit(event) {
     event.preventDefault()
@@ -40,7 +48,12 @@ export default function CheckoutPage() {
           })),
         },
       })
-      setOrder(mapOrderDto(result.data))
+      const mapped = mapOrderDto(result.data)
+      if (mapped.status !== 'compensation_required') {
+        setPaidSummary({ discountPercentage, discountAmount, payableTotal, subtotal })
+        recordOrderCompleted(user.id)
+      }
+      setOrder(mapped)
       clearCart()
     } catch (err) {
       if (err.code === 'COMPENSATION_REQUIRED' && err.payload?.data) {
@@ -67,10 +80,22 @@ export default function CheckoutPage() {
               so we do not double-charge. Retry uses the same Idempotency-Key.
             </p>
           ) : (
-            <p className="muted">
-              Line prices are snapshots copied at checkout, not live product prices. Payment was mocked
-              (Instapay). Refreshing will not create a second order.
-            </p>
+            <>
+              {paidSummary?.discountPercentage > 0 ? (
+                <p>
+                  {paidSummary.discountPercentage}% discount applied · you saved{' '}
+                  {formatPrice(paidSummary.discountAmount)}
+                </p>
+              ) : null}
+              <p>
+                Total paid: <strong>{formatPrice(paidSummary?.payableTotal ?? order.total)}</strong>
+              </p>
+              <p className="muted">
+                Line prices are snapshots copied at checkout, not live product prices. Payment was mocked
+                (Instapay). Refreshing will not create a second order.
+              </p>
+              <p className="muted">You've unlocked 15% off for the next 72 hours on your next order.</p>
+            </>
           )}
           <Link to="/orders">View orders</Link>
         </div>
@@ -92,6 +117,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="checkout-page">
+      <DiscountBanner />
       <div className="checkout-layout">
         <section className="checkout-card">
           <h1>Checkout</h1>
@@ -122,13 +148,21 @@ export default function CheckoutPage() {
             </label>
             {error ? <p className="form-error">{error}</p> : null}
             <button type="submit" className="primary-btn" disabled={busy}>
-              {busy ? 'Placing…' : `Place order · ${formatPrice(subtotal)}`}
+              {busy ? 'Placing…' : `Place order · ${formatPrice(payableTotal)}`}
             </button>
           </form>
         </section>
         <aside className="cart-summary">
           <p>
             {count} items · <strong>{formatPrice(subtotal)}</strong>
+          </p>
+          {discountPercentage > 0 ? (
+            <p className="checkout-discount-line">
+              Your discount ({discountPercentage}%): -{formatPrice(discountAmount)}
+            </p>
+          ) : null}
+          <p>
+            Total: <strong>{formatPrice(payableTotal)}</strong>
           </p>
           <ul>
             {items.map((item) => (

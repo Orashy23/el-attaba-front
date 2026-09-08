@@ -301,10 +301,24 @@ export const products = [
       { name: 'Luigi Green', hex: '#43b047' },
     ],
   },
-]
+].map((product, index) => ({
+  ...product,
+  // Stock and shelf-order fields aren't part of the hand-authored seed above —
+  // derive stable defaults so every product has them without 16 near-identical edits.
+  quantity: product.quantity ?? 20 + ((index * 7) % 60),
+  displayOrder: product.displayOrder ?? index + 1,
+}))
 
 export function formatPrice(amount) {
   return `EGP ${amount.toLocaleString('en-EG')}`
+}
+
+const SIZE_STEP_RATE = 0.12 // each size step up costs ~12% more than the base size
+
+/** How much more (in EGP) the size at `sizeIndex` costs versus the smallest/base size. */
+export function getSizeSurcharge(basePrice, sizeIndex) {
+  if (!sizeIndex || sizeIndex <= 0) return 0
+  return Math.round((basePrice * SIZE_STEP_RATE * sizeIndex) / 10) * 10
 }
 
 export function getProductById(id) {
