@@ -12,6 +12,8 @@ export function toProductDto(product) {
     badge: product.badge,
     image: product.image,
     description: product.description,
+    sizes: product.sizes ?? [],
+    colors: product.colors ?? [],
   }
 }
 
@@ -22,6 +24,8 @@ export function toOrderItemDto(item) {
     qty: item.qty,
     unitPriceSnapshot: item.unitPriceSnapshot,
     lineTotal: item.unitPriceSnapshot * item.qty,
+    color: item.color ?? null,
+    size: item.size ?? null,
   }
 }
 

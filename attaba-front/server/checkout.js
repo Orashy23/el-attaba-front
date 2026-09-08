@@ -46,6 +46,8 @@ function snapshotItems(store, requested) {
       title: product.title,
       qty,
       unitPriceSnapshot: product.price,
+      color: line.color ? String(line.color).slice(0, 60) : null,
+      size: line.size ? String(line.size).slice(0, 60) : null,
     }
   })
 }

@@ -1,12 +1,27 @@
 :root {
-  --bg: #ffffff;
-  --bg-soft: #f3f3f3;
-  --sand: #efe8dc;
-  --text: #111111;
-  --muted: #6b6b6b;
-  --line: #e6e6e6;
-  --sale: #e31c23;
-  --display: "Bebas Neue", Impact, sans-serif;
+  /* "lit shelf" palette */
+  --ink: #15130f;
+  --bone: #f1ece2;
+  --signal-red: #e33a2b;
+  --cobalt: #2c46d6;
+  --sunburst: #f2b22a;
+  --steel: #69645a;
+
+  /* legacy token names, repointed at the palette above so every page
+     picks up the restyle without a file-by-file rewrite */
+  --bg: var(--bone);
+  --bg-soft: #e7e0d0;
+  --sand: #e7e0d0;
+  --text: var(--ink);
+  --muted: var(--steel);
+  --line: rgba(21, 19, 15, 0.16);
+  --sale: var(--signal-red);
+  --link: var(--cobalt);
+  --accent-dark: var(--cobalt);
+  --border: var(--line);
+  --shadow: 0 12px 30px rgba(21, 19, 15, 0.12);
+
+  --display: "Archivo Black", "General Sans", sans-serif;
   --sans: Inter, system-ui, sans-serif;
   --header-h: 72px;
 }
@@ -49,6 +64,11 @@ img {
 
 button {
   cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 2px;
 }
 
 .app-shell {

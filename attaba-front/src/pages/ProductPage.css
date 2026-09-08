@@ -15,9 +15,10 @@
 .simple-page h1,
 .product-info h1 {
   font-family: var(--display);
-  letter-spacing: 0.06em;
+  letter-spacing: -0.01em;
   font-size: 42px;
   margin: 0 0 12px;
+  color: var(--ink);
 }
 
 .muted {
@@ -32,7 +33,7 @@
 }
 
 .product-gallery {
-  background: var(--sand);
+  background: radial-gradient(circle at 50% 36%, #2a2620 0%, var(--ink) 70%);
   min-height: 520px;
   display: grid;
   place-items: center;
@@ -44,54 +45,167 @@
   max-height: 720px;
   object-fit: contain;
   padding: 32px;
+  animation: image-reveal 0.5s ease;
+}
+
+@keyframes image-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-gallery img {
+    animation: none;
+  }
 }
 
 .product-cat {
   margin: 0 0 8px;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
+  font-size: 13px;
+  text-transform: capitalize;
+  color: var(--cobalt);
 }
 
-.product-amount {
-  font-size: 18px;
+.product-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
   margin: 16px 0 4px;
 }
 
+.product-amount {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--signal-red);
+}
+
 .product-was {
-  margin: 0 0 16px;
-  color: var(--muted);
+  color: var(--steel);
   text-decoration: line-through;
 }
 
 .product-copy {
   line-height: 1.7;
-  color: #333;
+  color: var(--steel);
+  max-width: 60ch;
+}
+
+.product-options {
+  margin-top: 20px;
+}
+
+.option-group {
+  margin-bottom: 18px;
+}
+
+.option-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.option-label strong {
+  color: var(--ink);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+}
+
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.size-option {
+  min-width: 48px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bone);
+  color: var(--ink);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.size-option:hover {
+  border-color: var(--ink);
+}
+
+.size-option.is-selected {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.color-option {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px transparent;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.color-option.is-selected {
+  border-color: var(--bone);
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.cart-item-variant {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .primary-btn,
-.ghost-btn {
+.buy-btn {
   display: inline-flex;
   justify-content: center;
   align-items: center;
   min-width: 220px;
   margin-top: 16px;
   padding: 14px 20px;
-  border: 1px solid #111;
+  border: 1px solid transparent;
   font-size: 12px;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  transition: opacity 0.15s ease;
 }
 
 .primary-btn {
-  background: #111;
-  color: #fff;
+  background: var(--ink);
+  color: var(--bone);
 }
 
-.ghost-btn {
-  background: transparent;
+.buy-btn {
+  background: var(--signal-red);
+  color: var(--bone);
   margin-left: 8px;
+}
+
+.primary-btn:hover,
+.buy-btn:hover {
+  opacity: 0.88;
 }
 
 .product-grid,
@@ -125,7 +239,7 @@
   width: 120px;
   height: 150px;
   object-fit: cover;
-  background: var(--sand);
+  background: var(--ink);
 }
 
 .cart-item h2 {
@@ -144,13 +258,14 @@
 .qty-row button,
 form input {
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--bone);
+  color: var(--ink);
   padding: 8px 10px;
 }
 
 .qty-row button {
   border: 0;
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid var(--ink);
   padding: 0;
 }
 
@@ -225,7 +340,7 @@ form input {
     grid-template-columns: 1fr;
   }
 
-  .ghost-btn {
+  .buy-btn {
     margin-left: 0;
     display: flex;
   }

@@ -32,7 +32,12 @@ export default function CheckoutPage() {
           address,
           phone,
           simulateFailure,
-          items: items.map((item) => ({ productId: item.id, qty: item.qty })),
+          items: items.map((item) => ({
+            productId: item.id,
+            qty: item.qty,
+            color: item.color,
+            size: item.size,
+          })),
         },
       })
       setOrder(mapOrderDto(result.data))
@@ -127,8 +132,11 @@ export default function CheckoutPage() {
           </p>
           <ul>
             {items.map((item) => (
-              <li key={item.id}>
-                {item.title} × {item.qty} · snapshot {formatPrice(item.unitPriceSnapshot ?? item.price)}
+              <li key={item.lineId}>
+                {item.title}
+                {item.color ? ` — ${item.color}` : ''}
+                {item.size ? ` / ${item.size}` : ''} × {item.qty} · snapshot{' '}
+                {formatPrice(item.unitPriceSnapshot ?? item.price)}
               </li>
             ))}
           </ul>

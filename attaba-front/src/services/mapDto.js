@@ -13,6 +13,8 @@ export function mapProductDto(dto) {
     badge: dto.badge,
     image: dto.image,
     description: dto.description,
+    sizes: dto.sizes ?? [],
+    colors: dto.colors ?? [],
   }
 }
 

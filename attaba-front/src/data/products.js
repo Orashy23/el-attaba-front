@@ -2,11 +2,11 @@ export const categories = [
   { id: 'all', label: 'All figures', slug: 'all' },
   { id: 'bestsellers', label: 'Top figures', slug: 'bestsellers' },
   { id: 'deals', label: 'On Sale', slug: 'deals' },
-  { id: 'marvel', label: 'Marvel', slug: 'marvel' },
-  { id: 'anime', label: 'Anime', slug: 'anime' },
-  { id: 'movies', label: 'Movies & TV', slug: 'movies' },
-  { id: 'sports', label: 'Sports', slug: 'sports' },
-  { id: 'gaming', label: 'Gaming', slug: 'gaming' },
+  { id: 'marvel', label: 'Marvel', slug: 'marvel', swatch: '#c23b2e' },
+  { id: 'anime', label: 'Anime', slug: 'anime', swatch: '#e0913a' },
+  { id: 'movies', label: 'Movies & TV', slug: 'movies', swatch: '#3d4a63' },
+  { id: 'sports', label: 'Sports', slug: 'sports', swatch: '#3f8a5c' },
+  { id: 'gaming', label: 'Gaming', slug: 'gaming', swatch: '#2c46d6' },
 ]
 
 export const collectionLinks = categories.filter(
@@ -24,9 +24,14 @@ export const products = [
     category: 'marvel',
     badge: 'Deal',
     image:
-      'https://images.unsplash.com/photo-1608889825103-eb5ed706fc64?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1614049026175-d2acb96c6a81?auto=format&fit=crop&w=800&q=80',
     description:
       'Posable Iron Man collectible with metallic finish and stand. A desk-scale figure for Marvel shelves.',
+    sizes: ['12 cm', '18 cm', '25 cm'],
+    colors: [
+      { name: 'Red & Gold', hex: '#c0392b' },
+      { name: 'Stealth Black', hex: '#1c1c1c' },
+    ],
   },
   {
     id: 'p2',
@@ -41,6 +46,11 @@ export const products = [
       'https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=800&q=80',
     description:
       'Classic red-and-blue Spider-Man figure with web-line base. Packed in a collector window box.',
+    sizes: ['12 cm', '16 cm', '20 cm'],
+    colors: [
+      { name: 'Classic Red & Blue', hex: '#c0392b' },
+      { name: 'Black Suit', hex: '#111111' },
+    ],
   },
   {
     id: 'p3',
@@ -55,6 +65,7 @@ export const products = [
       'https://images.unsplash.com/photo-1608889476561-6242cfdbf622?auto=format&fit=crop&w=800&q=80',
     description:
       'Five-figure Avengers set for display. Includes character cards and a shared stand.',
+    sizes: ['Standard (5 × 9 cm)', 'Deluxe (5 × 12 cm)'],
   },
   {
     id: 'p4',
@@ -65,9 +76,14 @@ export const products = [
     reviews: 412,
     category: 'marvel',
     image:
-      'https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1638379036667-ee3e8d663f2d?auto=format&fit=crop&w=800&q=80',
     description:
       'Shield-up pose with printed stars and stripes. A compact piece for mixed Marvel shelves.',
+    sizes: ['10 cm', '15 cm', '20 cm'],
+    colors: [
+      { name: 'Stars & Stripes', hex: '#2c5aa0' },
+      { name: 'Stealth Uniform', hex: '#2f3640' },
+    ],
   },
   {
     id: 'p5',
@@ -79,9 +95,14 @@ export const products = [
     category: 'anime',
     badge: 'Deal',
     image:
-      'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1750136370972-27df2d1a7c99?auto=format&fit=crop&w=800&q=80',
     description:
       'Dynamic anime statue with sculpted cloak and base. For Naruto collectors who want a larger piece.',
+    sizes: ['15 cm', '20 cm', '28 cm'],
+    colors: [
+      { name: 'Sage Mode', hex: '#e58e26' },
+      { name: 'Nine-Tails Cloak', hex: '#e74c3c' },
+    ],
   },
   {
     id: 'p6',
@@ -92,9 +113,14 @@ export const products = [
     reviews: 776,
     category: 'anime',
     image:
-      'https://images.unsplash.com/photo-1607604276583-e5829effed10?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1783765803367-9c57f64709ee?auto=format&fit=crop&w=800&q=80',
     description:
       'Battle-ready Saiyan sculpt with translucent energy effect. Comes with an extra pair of hands.',
+    sizes: ['12 cm', '18 cm', '24 cm'],
+    colors: [
+      { name: 'Super Saiyan', hex: '#f1c40f' },
+      { name: 'Base Form', hex: '#2c3e50' },
+    ],
   },
   {
     id: 'p7',
@@ -106,9 +132,10 @@ export const products = [
     category: 'anime',
     badge: 'Deal',
     image:
-      'https://images.unsplash.com/photo-1601814933824-fd0b574dd980?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1766062996151-e247dc21c1cf?auto=format&fit=crop&w=800&q=80',
     description:
-      'Chibi-style crew mini with stand. A bright shelf accent for One Piece fans.',
+      'Sculpted Luffy mini in his signature straw hat. A bright shelf accent for One Piece fans.',
+    sizes: ['Mini (6 cm)', 'Standard (10 cm)'],
   },
   {
     id: 'p8',
@@ -119,9 +146,14 @@ export const products = [
     reviews: 388,
     category: 'anime',
     image:
-      'https://images.unsplash.com/photo-1618336753974-aae5e9278aee?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1783937225803-1fad4eb202f5?auto=format&fit=crop&w=800&q=80',
     description:
       'Survey Corps figure with dual blades and 3D maneuver gear detailing.',
+    sizes: ['14 cm', '18 cm'],
+    colors: [
+      { name: 'Scout Regiment Green', hex: '#2e7d32' },
+      { name: 'Night Ops Grey', hex: '#616161' },
+    ],
   },
   {
     id: 'p9',
@@ -136,6 +168,11 @@ export const products = [
       'https://images.unsplash.com/photo-1531259683007-016a7b628fc3?auto=format&fit=crop&w=800&q=80',
     description:
       'Cowl-and-cape Batman with a matte black finish. A staple DC movie collectible.',
+    sizes: ['12 cm', '18 cm', '24 cm'],
+    colors: [
+      { name: 'Matte Black', hex: '#111111' },
+      { name: 'Tactical Grey', hex: '#4a4a4a' },
+    ],
   },
   {
     id: 'p10',
@@ -147,9 +184,11 @@ export const products = [
     category: 'movies',
     badge: 'Best seller',
     image:
-      'https://images.unsplash.com/photo-1608889825205-eebdb9fc5806?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1608889825103-eb5ed706fc64?auto=format&fit=crop&w=800&q=80',
     description:
-      'Cape-flow Vader with lightsaber. Display-ready for Star Wars collections.',
+      'Cape-flow Vader flanked by Stormtrooper escorts. Display-ready for Star Wars collections.',
+    sizes: ['16 cm', '22 cm', '30 cm'],
+    colors: [{ name: 'Classic Black', hex: '#0d0d0d' }],
   },
   {
     id: 'p11',
@@ -160,9 +199,14 @@ export const products = [
     reviews: 290,
     category: 'movies',
     image:
-      'https://images.unsplash.com/photo-1608889175123-8ee362201f81?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1748960644758-f090ba96d1da?auto=format&fit=crop&w=800&q=80',
     description:
       'Character figure with painted suit detail and a themed display base.',
+    sizes: ['14 cm', '18 cm'],
+    colors: [
+      { name: 'Purple Coat', hex: '#6c3483' },
+      { name: 'Green Vest', hex: '#1e8449' },
+    ],
   },
   {
     id: 'p12',
@@ -174,9 +218,14 @@ export const products = [
     category: 'sports',
     badge: 'Deal',
     image:
-      'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1744124338043-ab0a848cf26b?auto=format&fit=crop&w=800&q=80',
     description:
       'Football star figure in the No.10 kit. Inspired by the sports figures you see at Pop Spot.',
+    sizes: ['16 cm', '20 cm'],
+    colors: [
+      { name: 'Home Kit', hex: '#7fb3d5' },
+      { name: 'Away Kit', hex: '#1c2833' },
+    ],
   },
   {
     id: 'p13',
@@ -187,9 +236,14 @@ export const products = [
     reviews: 812,
     category: 'sports',
     image:
-      'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1782252152308-75c2e412f8d8?auto=format&fit=crop&w=800&q=80',
     description:
       'MINIX-style football mini. A compact collectible for national-team shelves.',
+    sizes: ['12 cm'],
+    colors: [
+      { name: 'Home Kit', hex: '#1c2833' },
+      { name: 'Away Kit', hex: '#f5f5f5' },
+    ],
   },
   {
     id: 'p14',
@@ -201,9 +255,14 @@ export const products = [
     category: 'sports',
     badge: 'Deal',
     image:
-      'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1617607626732-eb48d7d766a9?auto=format&fit=crop&w=800&q=80',
     description:
       'Egyptian-king pose with club kit printing. A local-favorite sports figure.',
+    sizes: ['14 cm', '18 cm'],
+    colors: [
+      { name: 'Home Red', hex: '#c8102e' },
+      { name: 'Third Kit', hex: '#f2f2f2' },
+    ],
   },
   {
     id: 'p15',
@@ -214,9 +273,14 @@ export const products = [
     reviews: 455,
     category: 'gaming',
     image:
-      'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1552875101-979d61f26eb0?auto=format&fit=crop&w=800&q=80',
     description:
       'Armored Chief with assault rifle accessory. Built for gaming desks and LED shelves.',
+    sizes: ['14 cm', '18 cm', '24 cm'],
+    colors: [
+      { name: 'Mjolnir Green', hex: '#1b4d3e' },
+      { name: 'Onyx', hex: '#141414' },
+    ],
   },
   {
     id: 'p16',
@@ -228,9 +292,14 @@ export const products = [
     category: 'gaming',
     badge: 'Deal',
     image:
-      'https://images.unsplash.com/photo-1555448248-2571daf34cba?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1781094732361-70f19ff999b0?auto=format&fit=crop&w=800&q=80',
     description:
-      'Stylized robot/hero figure for game-room displays. Matte armor with a small stand.',
+      'Retro gaming icon trio for game-room shelves. Bright, glossy sculpts sized for display.',
+    sizes: ['Standard (10 cm)'],
+    colors: [
+      { name: 'Mario Red', hex: '#e52521' },
+      { name: 'Luigi Green', hex: '#43b047' },
+    ],
   },
 ]
 

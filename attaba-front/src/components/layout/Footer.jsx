@@ -5,7 +5,7 @@ import './Footer.css'
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="footer-brand">FIGURES.</div>
+      <div className="footer-brand">FIGURES</div>
       <div className="footer-grid">
         <div>
           <h3>Worlds</h3>
