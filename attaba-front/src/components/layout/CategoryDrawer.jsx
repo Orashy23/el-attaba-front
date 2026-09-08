@@ -10,7 +10,9 @@ export default function CategoryDrawer({ open, onClose }) {
       <button type="button" className="drawer-backdrop" aria-label="Close menu" onClick={onClose} />
       <aside className="drawer-panel" role="dialog" aria-label="Menu">
         <div className="drawer-head">
-          <strong>FIGURES.</strong>
+          <strong className="brand">
+            FIGURES<span className="brand-mark" aria-hidden="true" />
+          </strong>
           <button type="button" onClick={onClose} aria-label="Close">
             ×
           </button>
@@ -32,6 +34,9 @@ export default function CategoryDrawer({ open, onClose }) {
             .map((item) => (
               <li key={item.id}>
                 <Link to={`/category/${item.slug}`} onClick={onClose}>
+                  {item.swatch ? (
+                    <span className="world-dot" style={{ background: item.swatch }} aria-hidden="true" />
+                  ) : null}
                   {item.label}
                 </Link>
               </li>

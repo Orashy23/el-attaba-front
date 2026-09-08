@@ -14,6 +14,16 @@ function IconSearch() {
   )
 }
 
+function IconHome() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+      <path d="M4 11.5 12 4l8 7.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 10v9h12v-9" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10 19v-5h4v5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 function IconUser() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
@@ -83,7 +93,7 @@ export default function Header({ onOpenMenu }) {
         </button>
 
         <Link to="/" className="brand">
-          FIGURES.
+          FIGURES<span className="brand-mark" aria-hidden="true" />
         </Link>
 
         <nav className="main-nav" aria-label="Shop">
@@ -110,6 +120,7 @@ export default function Header({ onOpenMenu }) {
             <div className="dropdown-panel" role="menu">
               {collectionLinks.map((item) => (
                 <Link key={item.id} to={`/category/${item.slug}`} role="menuitem">
+                  <span className="world-dot" style={{ background: item.swatch }} aria-hidden="true" />
                   {item.label}
                 </Link>
               ))}
@@ -123,6 +134,9 @@ export default function Header({ onOpenMenu }) {
         </nav>
 
         <div className="icon-nav">
+          <Link to="/" aria-label="Home">
+            <IconHome />
+          </Link>
           <Link to="/account" aria-label={isAuthed ? 'Account signed in' : 'Account'}>
             <IconUser />
           </Link>

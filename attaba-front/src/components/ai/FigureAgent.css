@@ -3,16 +3,130 @@
   right: 22px;
   bottom: 22px;
   z-index: 80;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 0;
-  background: var(--sale);
-  color: #fff;
-  font-family: var(--display);
-  font-size: 22px;
-  letter-spacing: 0.04em;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px 8px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(21, 19, 15, 0.35);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+
+.agent-fab::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--signal-red);
+  flex: none;
+}
+
+.agent-fab:hover,
+.agent-fab:focus-visible {
+  border-color: var(--signal-red);
+  box-shadow: 0 12px 34px rgba(21, 19, 15, 0.4), 0 0 0 3px rgba(227, 58, 43, 0.25);
+  transform: translateY(-2px);
+}
+
+.agent-fab-bot {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  color: var(--signal-red);
+}
+
+.agent-fab-label {
+  white-space: nowrap;
+}
+
+/* Base (rest) state for animated bot parts — the transitions here are what
+   makes the hover animation smoothly reverse once the pointer leaves. */
+.bot-antenna,
+.bot-antenna-stem {
+  transform-origin: 16px 6px;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bot-head {
+  transform-origin: 16px 16px;
+  transition: transform 0.35s ease;
+}
+
+.bot-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.bot-mouth {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+/* Hover (active) state — plays a looping animation forward; on mouse-out the
+   animation is removed and the base transitions above ease everything back
+   to its resting position, i.e. the animation "reverses". */
+.agent-fab:hover .bot-antenna,
+.agent-fab:hover .bot-antenna-stem,
+.agent-fab:focus-visible .bot-antenna,
+.agent-fab:focus-visible .bot-antenna-stem {
+  animation: bot-antenna-wiggle 0.9s ease-in-out infinite;
+}
+
+.agent-fab:hover .bot-head,
+.agent-fab:focus-visible .bot-head {
+  animation: bot-head-bob 1.2s ease-in-out infinite;
+}
+
+.agent-fab:hover .bot-eye,
+.agent-fab:focus-visible .bot-eye {
+  animation: bot-eye-blink 1.6s ease-in-out infinite;
+}
+
+.agent-fab:hover .bot-mouth,
+.agent-fab:focus-visible .bot-mouth {
+  animation: bot-mouth-talk 0.9s ease-in-out infinite;
+}
+
+@keyframes bot-antenna-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(16deg); }
+}
+
+@keyframes bot-head-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes bot-eye-blink {
+  0%, 80%, 100% { transform: scaleY(1); }
+  90% { transform: scaleY(0.15); }
+}
+
+@keyframes bot-mouth-talk {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-fab:hover .bot-antenna,
+  .agent-fab:hover .bot-antenna-stem,
+  .agent-fab:hover .bot-head,
+  .agent-fab:hover .bot-eye,
+  .agent-fab:hover .bot-mouth,
+  .agent-fab:focus-visible .bot-antenna,
+  .agent-fab:focus-visible .bot-antenna-stem,
+  .agent-fab:focus-visible .bot-head,
+  .agent-fab:focus-visible .bot-eye,
+  .agent-fab:focus-visible .bot-mouth {
+    animation: none;
+  }
 }

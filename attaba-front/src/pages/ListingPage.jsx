@@ -37,9 +37,7 @@ export default function ListingPage() {
   return (
     <div className="listing-page">
       <h1>{heading}</h1>
-      <p className="muted">
-        {meta ? `${meta.total} results · cache ${meta.cache}` : `${items.length} results`}
-      </p>
+      <p className="muted">{meta ? `${meta.total} results` : `${items.length} results`}</p>
       <div className="product-grid">
         {items.map((product) => (
           <ProductCard key={product.id} product={product} />

@@ -26,19 +26,26 @@ export default function CartPage() {
         <section className="page-card">
           <h1>Your bag</h1>
           {items.map((item) => (
-            <article key={item.id} className="cart-item">
-              <img src={item.image} alt="" />
+            <article key={item.lineId} className="cart-item">
+              <img src={item.image} alt={item.title} />
               <div>
                 <h2>
                   <Link to={`/product/${item.id}`}>{item.title}</Link>
                 </h2>
+                {item.color || item.size ? (
+                  <p className="cart-item-variant">
+                    {item.color ? <span>Color: {item.color}</span> : null}
+                    {item.color && item.size ? ' · ' : ''}
+                    {item.size ? <span>Size: {item.size}</span> : null}
+                  </p>
+                ) : null}
                 <p className="in-stock">In stock</p>
                 <div className="qty-row">
                   <label>
                     Qty
                     <select
                       value={item.qty}
-                      onChange={(event) => updateQty(item.id, Number(event.target.value))}
+                      onChange={(event) => updateQty(item.lineId, Number(event.target.value))}
                     >
                       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
                         <option key={n} value={n}>
@@ -47,7 +54,7 @@ export default function CartPage() {
                       ))}
                     </select>
                   </label>
-                  <button type="button" onClick={() => removeItem(item.id)}>
+                  <button type="button" onClick={() => removeItem(item.lineId)}>
                     Delete
                   </button>
                 </div>

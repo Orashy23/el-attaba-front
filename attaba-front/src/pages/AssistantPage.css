@@ -21,9 +21,10 @@
 
 .assistant-head h1 {
   font-family: var(--display);
-  letter-spacing: 0.06em;
+  letter-spacing: -0.01em;
   font-size: 48px;
   margin: 0 0 8px;
+  color: var(--ink);
 }
 
 .assistant-head span {
@@ -58,13 +59,16 @@
 
 .assistant-msg.is-you {
   align-self: flex-end;
-  background: #111;
-  color: #fff;
+  background: var(--ink);
+  color: var(--bone);
+  border-radius: 2px;
 }
 
 .assistant-msg.is-agent {
   align-self: flex-start;
-  background: var(--sand);
+  background: var(--bg-soft);
+  color: var(--ink);
+  border-radius: 2px;
 }
 
 .assistant-busy {
@@ -89,8 +93,8 @@
 
 .assistant-composer button {
   border: 0;
-  background: var(--sale);
-  color: #fff;
+  background: var(--signal-red);
+  color: var(--bone);
   padding: 0 22px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
